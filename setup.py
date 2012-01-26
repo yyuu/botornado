@@ -20,7 +20,7 @@ with contextlib.closing(open("packages.txt")) as fp:
 
 setup(
   name='botornado',
-  version='0.0.1git',
+  version='0.0.1',
   description='botornado',
   author='Yamashita, Yuu',
   author_email='yamashita@geishatokyo.com',
