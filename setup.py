@@ -21,13 +21,26 @@ with contextlib.closing(open("packages.txt")) as fp:
 setup(
   name='botornado',
   version='0.0.2git',
-  description='botornado',
+  description='boto on tornado - an asynchronous Amazon Web Service (AWS) client',
   author='Yamashita, Yuu',
   author_email='yamashita@geishatokyo.com',
   url='https://github.com/yyuu/botornado',
   install_requires=install_requires,
   packages=find_packages(),
+  package_data={
+     'botornado': [],
+  },
   test_suite='botornado.test',
+  license='MIT',
+  platforms="Posix; MacOS X; Windows",
+  classifiers=[
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Internet"
+  ],
 )
 
 # vim:set ft=python :
