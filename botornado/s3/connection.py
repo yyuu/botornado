@@ -170,3 +170,4 @@ class AsyncS3Connection(botornado.connection.AsyncAWSAuthConnection, boto.s3.con
                 data, host, auth_path, sender,
                 callback=callback, **kwargs)
 
+# vim:set ft=python sw=4 :

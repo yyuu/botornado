@@ -34,3 +34,5 @@ class AsyncJSONMessage(botornado.sqs.message.AsyncMHMessage, JSONMessage):
     """
     Acts like a dictionary but encodes it's data as a Base64 encoded JSON payload.
     """
+
+# vim:set ft=python sw=4 :

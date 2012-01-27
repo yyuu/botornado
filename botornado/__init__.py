@@ -342,3 +342,5 @@ def connect_ia(ia_access_key_id=None, ia_secret_access_key=None,
     :return: A connection to the Internet Archive
     """
     raise BotoClientError('Not Implemented')
+
+# vim:set ft=python sw=4 :

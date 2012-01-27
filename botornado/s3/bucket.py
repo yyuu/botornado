@@ -214,3 +214,5 @@ class AsyncBucket(Bucket):
         
     def delete(self, headers=None, callback=None):
         return self.connection.delete_bucket(self.name, headers=headers, callback=callback)
+
+# vim:set ft=python sw=4 :

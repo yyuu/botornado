@@ -298,3 +298,4 @@ class AsyncQueue(Queue):
     # for backward compatibility
     load = load_from_filename
 
+# vim:set ft=python sw=4 :

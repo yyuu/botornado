@@ -298,3 +298,5 @@ class AsyncAWSQueryConnection(AsyncConnection, boto.connection.AWSQueryConnectio
                 boto.log.error('%s' % body)
                 raise self.ResponseError(response.status, response.reason, body)
         self.make_request(action, params, path, verb, callback=status_got)
+
+# vim:set ft=python sw=4 :

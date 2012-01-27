@@ -296,3 +296,4 @@ class AsyncSQSConnection(botornado.connection.AsyncAWSQueryConnection, SQSConnec
     
 
     
+# vim:set ft=python sw=4 :

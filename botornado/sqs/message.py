@@ -123,3 +123,4 @@ class AsyncEncodedMHMessage(AsyncMHMessage, EncodedMHMessage):
     i.e. m['HeaderName'] would return 'HeaderValue'.
     """
     
+# vim:set ft=python sw=4 :

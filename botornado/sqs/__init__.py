@@ -16,4 +16,4 @@ def connect_to_region(region_name, **kwargs):
             return region.connect(**kwargs)
     return None
 
-# vim:set ft=python :
+# vim:set ft=python sw=4 :

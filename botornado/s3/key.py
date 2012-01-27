@@ -895,3 +895,5 @@ class AsyncKey(Key):
         self.get_contents_to_file(fp, headers, cb, num_cb, torrent=torrent,
                                   version_id=version_id,
                                   response_headers=response_headers, callback=got_contents_as_string)
+
+# vim:set ft=python sw=4 :
