@@ -79,7 +79,7 @@ class AsyncHTTPConnection(object):
     """
     a wrapper class to tornado.httpclient.AsyncHTTPClient
     """
-    def __init__(self, host, port=None, strict=None, timeout=20.0, client=None):
+    def __init__(self, host, port=None, strict=None, timeout=20.0, http_client=None, **kwargs):
         """
         """
         self.method = 'GET'
@@ -89,7 +89,7 @@ class AsyncHTTPConnection(object):
         self.headers = []
         self.body = None
         self.timeout = timeout
-        self.client = client if client else tornado.httpclient.AsyncHTTPClient()
+        self.http_client = http_client if http_client else tornado.httpclient.AsyncHTTPClient(**kwargs)
 
     def __repr__(self):
         return '<AsyncHTTPConnection: %s>' % (repr(self.getrequest()))
@@ -125,7 +125,7 @@ class AsyncHTTPConnection(object):
         def fetched(tornado_response):
             if callable(callback):
                 callback(AsyncHTTPResponse(tornado_response))
-        self.client.fetch(self.getrequest(), callback=fetched)
+        self.http_client.fetch(self.getrequest(), callback=fetched)
 
     def set_debuglevel(self, level):
         pass
@@ -184,8 +184,8 @@ class AsyncHTTPResponse(object):
     msg = property(_get_msg)
 
 class AsyncConnection(object):
-    def __init__(self, io_loop=None, max_clients=10):
-        self._httpclient = tornado.httpclient.AsyncHTTPClient(io_loop=io_loop, max_clients=max_clients)
+    def __init__(self, http_client=None, **kwargs):
+        self._httpclient = http_client if http_client else tornado.httpclient.AsyncHTTPClient(**kwargs)
 
     def get_http_connection(self, host, is_secure):
         """
@@ -193,9 +193,9 @@ class AsyncConnection(object):
         None if there is no connection that can be reused.
         """
         if is_secure:
-            return AsyncHTTPSConnection(host, client=self._httpclient)
+            return AsyncHTTPSConnection(host, http_client=self._httpclient)
         else:
-            return AsyncHTTPConnection(host, client=self._httpclient)
+            return AsyncHTTPConnection(host, http_client=self._httpclient)
 
     def _mexe(self, request, sender=None, callback=None):
         boto.log.debug('Method: %s' % request.method)
@@ -216,8 +216,8 @@ class AsyncConnection(object):
             connection.getresponse(callback=callback)
 
 class AsyncAWSAuthConnection(AsyncConnection, boto.connection.AWSAuthConnection):
-    def __init__(self, host, io_loop=None, max_clients=10, **kwargs):
-        AsyncConnection.__init__(self, io_loop=io_loop, max_clients=max_clients)
+    def __init__(self, host, http_client=None, http_client_params={}, **kwargs):
+        AsyncConnection.__init__(self, http_client=http_client, **http_client_params)
         boto.connection.AWSAuthConnection.__init__(self, host, **kwargs)
 
     def make_request(self, method, path, headers=None, data='', host=None, auth_path=None, sender=None, callback=None, **kwargs):
@@ -226,8 +226,8 @@ class AsyncAWSAuthConnection(AsyncConnection, boto.connection.AWSAuthConnection)
         self._mexe(request, sender=sender, callback=callback)
 
 class AsyncAWSQueryConnection(AsyncConnection, boto.connection.AWSQueryConnection):
-    def __init__(self, io_loop=None, max_clients=10, **kwargs):
-        AsyncConnection.__init__(self, io_loop=io_loop, max_clients=max_clients)
+    def __init__(self, http_client=None, http_client_params={}, **kwargs):
+        AsyncConnection.__init__(self, http_client=http_client, **http_client_params)
         boto.connection.AWSQueryConnection.__init__(self, **kwargs)
 
     def make_request(self, action, params, path, verb, callback=None):
