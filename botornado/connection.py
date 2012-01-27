@@ -106,7 +106,11 @@ class AsyncHTTPConnection(object):
             self.headers += [ (k, headers[k]) for k in headers ]
 
     def getrequest(self, scheme='http'):
-        url = urlparse.urlunsplit((scheme, self.host, self.path, '', ''))
+        if self.port and (( scheme == 'http' and self.port != 80 ) or ( scheme == 'https' and self.port != 443 )):
+            host = "%s:%d" % (self.host, self.port)
+        else:
+            host = self.host
+        url = urlparse.urlunsplit((scheme, host, self.path, '', ''))
         headers = tornado.httputil.HTTPHeaders()
         for (k,v) in self.headers:
             headers.add(k, v)
