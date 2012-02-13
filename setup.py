@@ -19,7 +19,7 @@ setup(
     author_email='yamashita@geishatokyo.com',
     url='https://github.com/yyuu/botornado',
     install_requires=[
-        "boto",
+        "boto==2.2.1",
         "tornado>=2.1.1",
     ],
     packages=find_packages(),

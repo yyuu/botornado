@@ -40,9 +40,10 @@ import botornado.s3.key
 class AsyncS3Connection(botornado.connection.AsyncAWSAuthConnection, boto.s3.connection.S3Connection):
     def __init__(self, host=boto.s3.connection.S3Connection.DefaultHost,
                        calling_format=boto.s3.connection.SubdomainCallingFormat(),
-                       bucket_class=botornado.s3.bucket.AsyncBucket, **kwargs):
+                       bucket_class=botornado.s3.bucket.AsyncBucket, anon=False, **kwargs):
         self.calling_format = calling_format
         self.bucket_class = bucket_class
+        self.anon = anon
         botornado.connection.AsyncAWSAuthConnection.__init__(self, host, **kwargs)
 
     def get_all_buckets(self, headers=None, callback=None):
