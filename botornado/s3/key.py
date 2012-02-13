@@ -303,7 +303,7 @@ class AsyncKey(Key):
             headers['Content-Type'] = self.content_type
         if not chunked_transfer:
             headers['Content-Length'] = str(self.size)
-        headers['Expect'] = '100-Continue'
+#       headers['Expect'] = '100-Continue'
         headers = boto.utils.merge_meta(headers, self.metadata, provider)
         def file_sent(resp):
             self.handle_version_headers(resp, force=True)
