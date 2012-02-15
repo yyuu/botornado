@@ -70,7 +70,18 @@ from boto.exception import SQSDecodeError
 
 from boto.sqs.message import *
 
-class AsyncRawMessage(RawMessage):
+class _AsyncMessage:
+    def delete(self, callback=None):
+        if self.queue:
+            return self.queue.delete_message(self, callback=callback)
+
+    def change_visibility(self, visibility_timeout, callback=None):
+        if self.queue:
+            self.queue.connection.change_message_visibility(self.queue,
+                                                            self.receipt_handle,
+                                                            visibility_timeout, callback=callback)
+
+class AsyncRawMessage(_AsyncMessage, RawMessage):
     """
     Base class for SQS messages.  RawMessage does not encode the message
     in any way.  Whatever you store in the body of the message is what
@@ -87,7 +98,7 @@ class AsyncRawMessage(RawMessage):
                                                             self.receipt_handle,
                                                             visibility_timeout, callback=callback)
      
-class AsyncMessage(AsyncRawMessage, Message):
+class AsyncMessage(_AsyncMessage, Message):
     """
     The default Message class used for SQS queues.  This class automatically
     encodes/decodes the message body using Base64 encoding to avoid any
@@ -99,7 +110,7 @@ class AsyncMessage(AsyncRawMessage, Message):
     be transparent to the end-user.
     """
 
-class AsyncMHMessage(AsyncMessage, MHMessage):
+class AsyncMHMessage(_AsyncMessage, MHMessage):
     """
     The MHMessage class provides a message that provides RFC821-like
     headers like this:
@@ -111,7 +122,7 @@ class AsyncMHMessage(AsyncMessage, MHMessage):
     like a mapping object, i.e. m['HeaderName'] would return 'HeaderValue'.
     """
 
-class AsyncEncodedMHMessage(AsyncMHMessage, EncodedMHMessage):
+class AsyncEncodedMHMessage(_AsyncMessage, EncodedMHMessage):
     """
     The EncodedMHMessage class provides a message that provides RFC821-like
     headers like this:

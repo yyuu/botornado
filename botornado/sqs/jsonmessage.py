@@ -30,7 +30,7 @@ except ImportError:
 from boto.sqs.jsonmessage import *
 import botornado.sqs.message
 
-class AsyncJSONMessage(botornado.sqs.message.AsyncMHMessage, JSONMessage):
+class AsyncJSONMessage(botornado.sqs.message._AsyncMessage, JSONMessage):
     """
     Acts like a dictionary but encodes it's data as a Base64 encoded JSON payload.
     """
