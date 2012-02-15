@@ -1,7 +1,10 @@
+*.BAK
+*.bak
 *.pyc
 *.pyo
 *.swo
 *.swp
+*.orig
 /*.egg
 /*.egg-info
 /build
