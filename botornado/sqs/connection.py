@@ -230,10 +230,9 @@ class AsyncSQSConnection(botornado.connection.AsyncAWSQueryConnection, SQSConnec
         
     def get_queue(self, queue_name, callback=None):
         def queue_got(response):
-            for q in response: 
-                if q.url.endswith(queue_name):
-                    if callable(callback):
-                        callback(q)
+            qs = [ q for q in response if q.url.endswith(queue_name) ]
+            if callable(callback):
+                callback(qs[0] if 0 < len(qs) else None)
         self.get_all_queues(queue_name, callback=queue_got)
 
     lookup = get_queue
