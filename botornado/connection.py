@@ -296,7 +296,7 @@ class AsyncAWSQueryConnection(AsyncConnection, boto.connection.AWSQueryConnectio
                 h = boto.handler.XmlHandler(rs, parent)
                 xml.sax.parseString(body, h)
                 if callable(callback):
-                    callback(rs)
+                    callback(rs.status)
             else:
                 boto.log.error('%s %s' % (response.status, response.reason))
                 boto.log.error('%s' % body)
