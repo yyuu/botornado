@@ -5,7 +5,7 @@
 An asynchronous AWS client on Tornado.
 
 This is a dirty work to move boto onto Tornado ioloop.
-Only SQS and S3 have been implemented as of 2011/Jan/26.
+Only SQS and S3 have been implemented as of 2012/Jan/26.
 
 
 ## Requirements
@@ -48,5 +48,5 @@ MIT
 
 ## Author
 
-Copyright (C) 2011 Yamashita, Yuu <yamashita@geishatokyo.com>
-Copyright (C) 2011 Geisha Tokyo Entertainment, Inc.
+* Copyright (C) 2011 Yamashita, Yuu <yamashita@geishatokyo.com>
+* Copyright (C) 2011 Geisha Tokyo Entertainment, Inc.
