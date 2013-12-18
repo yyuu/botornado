@@ -147,7 +147,10 @@ class AsyncHTTPConnection(object):
         pass
 
     def send(self, data):
-        self.body = data if data else None
+        if self.body is not None and data:
+            self.body += data
+	else: 
+            self.body = data if data else None
 
 class AsyncHTTPSConnection(AsyncHTTPConnection):
     def getrequest(self, scheme='https'):
