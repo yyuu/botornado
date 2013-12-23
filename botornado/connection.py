@@ -149,7 +149,7 @@ class AsyncHTTPConnection(object):
     def send(self, data):
         if self.body is not None and data:
             self.body += data
-	else: 
+        else:
             self.body = data if data else None
 
 class AsyncHTTPSConnection(AsyncHTTPConnection):
