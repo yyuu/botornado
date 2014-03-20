@@ -141,7 +141,7 @@ class AsyncHTTPConnection(object):
         self.path = path
 
     def putheader(self, header, argument):
-    	  self.headers.append((header, argument))
+        self.headers.append((header, argument))
 
     def endheaders(self):
         pass
