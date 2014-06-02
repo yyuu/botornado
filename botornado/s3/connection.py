@@ -93,7 +93,7 @@ class AsyncS3Connection(botornado.connection.AsyncAWSAuthConnection, boto.s3.con
         def lookedup(bucket):
             if callable(callback):
                 callback(bucket)
-        self.get_bucket(bucket_name, validate, headers=headers, callabck=lookedup)
+        self.get_bucket(bucket_name, validate, headers=headers, callback=lookedup)
 
     def create_bucket(self, bucket_name, headers=None,
                       location=Location.DEFAULT, policy=None, callback=None):
