@@ -13,7 +13,7 @@ except ImportError:
 
 setup(
     name='botornado',
-    version='0.0.4',
+    version='0.0.5git',
     description='boto on tornado - an asynchronous Amazon Web Service (AWS) client',
     author='Yamashita, Yuu',
     author_email='peek824545201@gmail.com',
