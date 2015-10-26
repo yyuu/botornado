@@ -48,5 +48,4 @@ MIT
 
 ## Author
 
-* Copyright (C) 2011 Yamashita, Yuu <yamashita@geishatokyo.com>
-* Copyright (C) 2011 Geisha Tokyo Entertainment, Inc.
+* Copyright (C) 2015 Yamashita, Yuu <yamashita@geishatokyo.com>

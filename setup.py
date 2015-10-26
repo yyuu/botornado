@@ -16,7 +16,7 @@ setup(
     version='0.0.4git',
     description='boto on tornado - an asynchronous Amazon Web Service (AWS) client',
     author='Yamashita, Yuu',
-    author_email='yamashita@geishatokyo.com',
+    author_email='peek824545201@gmail.com',
     url='https://github.com/yyuu/botornado',
     install_requires=[
 #       "boto==2.2.2", # current version of botornado includes tested version of boto in source tree
